@@ -23,8 +23,8 @@ Then, separately:
 
 ## What it found
 
-Nine of the eleven checks come out identical on the copy. The two that do not are
-both logins.
+Eight of the eleven checks come out identical on the copy. Two of the three that
+do not are the same problem: logins.
 
 | | careful move | naive move |
 | --- | --- | --- |
@@ -33,6 +33,7 @@ both logins.
 | an uploaded image | same | **HTTP 404** |
 | a row restricted to its owner | same | **owner is a user that does not exist** |
 | server-side code | same | same |
+| the creation date of every row | **rewritten** | **rewritten** |
 | a user logging in with their password | **fails** | **fails** |
 
 The naive move is the obvious one: take the exported JSON and push it up. `NAIVE=1

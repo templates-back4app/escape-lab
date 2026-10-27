@@ -29,9 +29,11 @@ const CHECKS = [
       return f.ok ? `${(await f.arrayBuffer()).byteLength} bytes` : `HTTP ${f.status}`;
     } catch (e) { return `unreachable (${e.cause?.code ?? e.message})`; }
   }],
-  ['oldest product dated', async (s) => {
+  // the full timestamp, not the date: importing on the same day would otherwise
+  // make a rewritten createdAt look preserved
+  ['oldest product created at', async (s) => {
     const r = await get(s, '/classes/Product?order=createdAt&limit=1&keys=createdAt');
-    return (r.json.results[0]?.createdAt ?? '?').slice(0, 10);
+    return r.json.results[0]?.createdAt ?? '?';
   }],
   ['ana can log in', async (s) => {
     const u = USERS[0];
