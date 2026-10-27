@@ -1,0 +1,35 @@
+# Two independent backends: the one you built on, and the one you are moving to.
+# Nothing is shared between them -- separate databases, separate app ids, separate
+# file storage. That is the point: the only way across is the export.
+services:
+  mongo-a:
+    image: mongo:7
+    command: ["--quiet"]
+  parse-a:
+    image: parseplatform/parse-server:7.4.0
+    depends_on: [mongo-a]
+    ports: ["1337:1337"]
+    volumes: ["./cloud:/parse-server/cloud:ro"]
+    environment:
+      PARSE_SERVER_APPLICATION_ID: origin-app
+      PARSE_SERVER_MASTER_KEY: origin-master-key
+      PARSE_SERVER_DATABASE_URI: mongodb://mongo-a:27017/dev
+      PARSE_SERVER_CLOUD: /parse-server/cloud/main.js
+      PARSE_SERVER_ALLOW_CLIENT_CLASS_CREATION: "true"
+      PARSE_SERVER_MASTER_KEY_IPS: "0.0.0.0/0,::/0"
+
+  mongo-b:
+    image: mongo:7
+    command: ["--quiet"]
+  parse-b:
+    image: parseplatform/parse-server:7.4.0
+    depends_on: [mongo-b]
+    ports: ["1338:1337"]
+    volumes: ["./cloud:/parse-server/cloud:ro"]
+    environment:
+      PARSE_SERVER_APPLICATION_ID: destination-app
+      PARSE_SERVER_MASTER_KEY: destination-master-key
+      PARSE_SERVER_DATABASE_URI: mongodb://mongo-b:27017/dev
+      PARSE_SERVER_CLOUD: /parse-server/cloud/main.js
+      PARSE_SERVER_ALLOW_CLIENT_CLASS_CREATION: "true"
+      PARSE_SERVER_MASTER_KEY_IPS: "0.0.0.0/0,::/0"
