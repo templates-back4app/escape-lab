@@ -1,10 +1,14 @@
 # escape-lab
 
+[![Deploy on Back4app](https://img.shields.io/badge/Deploy%20on-Back4app-1568B8?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEyIDJMMiA3djEwbDEwIDUgMTAtNVY3eiIvPjwvc3ZnPg==)](https://www.back4app.com/signup?utm_source=github&utm_medium=repo&utm_campaign=escape-lab)
+
 An app is built on one backend, carried to a second backend that shares nothing
 with the first, and then both are asked the same eleven questions.
 
 It answers the only lock-in question that matters: **if you left today, what would
 still work?**
+
+> **Read the article:** [Backend Lock-In, Tested: We Exported an App and Moved It. Here Is What Survived](https://www.back4app.com/blog/backend-lock-in-export-and-move-your-app?utm_source=github&utm_medium=repo&utm_campaign=escape-lab)
 
 ## Run it
 
